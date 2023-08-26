@@ -1,3 +1,9 @@
+// Permite definir las especificaciones de regla que el equipo defina:
 {
-  "extends": "next/core-web-vitals"
+	"extends": "next/core-web-vitals",
+	"rules": {
+		"quotes": ["error", "double"],
+		"curly": "error",
+		"no-empty": "error"
+	}
 }
