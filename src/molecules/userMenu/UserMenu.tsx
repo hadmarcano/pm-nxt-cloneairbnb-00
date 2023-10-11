@@ -2,12 +2,20 @@
 
 import { useState, useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import {signOut} from "next-auth/react";
 import Avatar from "@molecules/avatar/Avatar";
 import MenuItem from "@molecules/menuItem/MenuItem";
 import useRegisterModal from "@/custom-hooks/useRegisterModal";
+import useLoginModal from "@/custom-hooks/useLoginModal";
+import { UserMenuProps } from "./interfaces/userMenuProps.interface";
 
-const UserMenu = () => {
+
+// Pending to do:
+// - currentUser
+// - signOut
+const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
 	const registerModal = useRegisterModal();
+	const loginModal = useLoginModal();
 	const [isOpen, setIsOpen] = useState(false);
 
 	// USECALLBACK : Retorna una función memoizada del cálculo de esa funcion,
@@ -33,17 +41,33 @@ const UserMenu = () => {
 				>
 					<AiOutlineMenu />
 					<div className="hidden md:block">
-						<Avatar />
+						<Avatar src={currentUser?.image} />
 					</div>
 				</div>
 			</div>
 			{isOpen && (
 				<div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm  ">
 					<div className="flex flex-col cursor-pointer">
-						<>
-							<MenuItem onClick={registerModal.onOpen} label="registrate" />
-							<MenuItem onClick={() => {}} label="Iniciar sesión" />
-						</>
+						{currentUser ? (
+							<>
+								<MenuItem onClick={()=>{}} label="Mis viajes" />
+								<MenuItem onClick={()=>{}} label="Mis favoritos" />
+								<MenuItem onClick={()=>{}} label="Mis reservas" />
+								<MenuItem onClick={()=>{}} label="Mis propiedades" />
+								<MenuItem onClick={()=>{}} label="Airbnb tu casa" />
+								<hr/>
+								<MenuItem onClick={()=>signOut()} label="Logout" />
+							</>
+						)
+						:
+						(
+							<>
+								<MenuItem onClick={registerModal.onOpen} label="registrate" />
+								<MenuItem onClick={loginModal.onOpen} label="Iniciar sesión" />
+							</>
+						)
+					}
+
 					</div>
 				</div>
 			)}

@@ -3,10 +3,12 @@ import Container from "@molecules/container/Container";
 import Logo from "@molecules/logo/Logo";
 import Search from "@molecules/search/Search";
 import UserMenu from "@molecules/userMenu/UserMenu";
+import Categories from "@molecules/categories/categories/Categories";
+import { NavbarProps } from "./interfaces/navbarProps.interface";
 
 // Design Pattern Stateful/Stateless
 // Stateless
-const Navbar = () => (
+const Navbar: React.FC<NavbarProps> = ({currentUser}) => (
 	<div className="fixed w-full bg-white z-10 shadow-sm">
 		<div className="py-4 border-b-[1px]">
 			<Container>
@@ -22,10 +24,11 @@ const Navbar = () => (
 				>
 					<Logo />
 					<Search />
-					<UserMenu />
+					<UserMenu currentUser={currentUser} />
 				</div>
 			</Container>
 		</div>
+		<Categories/>
 	</div>
 );
 
