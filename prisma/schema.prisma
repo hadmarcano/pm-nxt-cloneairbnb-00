@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-   provider = "prisma-client-js"
+   provider = "prisma-client-js" // darle soporte y compatibilidad con un entorno de trabajo de nodejs
 }
 
 datasource db {
@@ -13,7 +13,7 @@ datasource db {
 model User {
    id             String    @id @default(auto()) @map("_id") @db.ObjectId
    name           String?
-   email          String    @unique
+   email          String?   @unique
    emailVerified  DateTime?
    image          String?
    hashedPassword String?
@@ -21,7 +21,7 @@ model User {
    updatedAt      DateTime  @updatedAt
    favoriteIds    String[]  @db.ObjectId
 
-   // Refs...
+   // Refs
    accounts     Account[]
    listings     Listing[]
    reservations Reservation[]
@@ -75,6 +75,6 @@ model Reservation {
    totalPrice Int
    createdAt  DateTime @default(now())
 
-   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+   user    User    @relation(fields: [userId], references: [id])
+   listing Listing @relation(fields: [listingId], references: [id])
 }

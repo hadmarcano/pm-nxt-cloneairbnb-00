@@ -18,14 +18,16 @@ export const authOptions: AuthOptions = {
 				email: { label: "email", type: "text" },
 				password: { label: "password", type: "password" },
 			},
-			// auth managers
+			// manejador de auth
 			async authorize(credentials) {
 				if (!credentials?.email || !credentials?.password) {
 					throw new Error("Credenciales inválidas");
 				}
 
 				const user = await prisma.user.findUnique({
-					where: { email: credentials.email },
+					where: {
+						email: credentials.email,
+					},
 				});
 
 				if (!user || !user?.hashedPassword) {
@@ -42,18 +44,18 @@ export const authOptions: AuthOptions = {
 			},
 		}),
 	],
-	// Context of route from will be trigger the signIn function...
+	// le das contexto desde que ruta se va a disparar el signin
 	pages: {
 		signIn: "/",
 	},
-	// Add process inspect for development
+	// añadir un inspector de proceso
 	debug: process.env.NODE_ENV === "development",
-	// Add how to session management
-	session:{
-		strategy:"jwt", // default value
+	// vinculación de manejo con jwt
+	session: {
+		strategy: "jwt",
 	},
-	// Add Seed that validates and signs the token generated...
-	secret:	process.env.NEXT_AUTH_SECRET
+	// semilla: firma y valide los tokens generados
+	secret: process.env.NEXT_AUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

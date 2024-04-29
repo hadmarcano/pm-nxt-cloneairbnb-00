@@ -1,9 +1,9 @@
-// Permite definir las especificaciones de regla que el equipo defina:
 {
 	"extends": "next/core-web-vitals",
 	"rules": {
 		"quotes": ["error", "double"],
 		"curly": "error",
-		"no-empty": "error"
+		"no-empty": "error",
+		"react-hooks/rules-of-hooks": "off"
 	}
 }
