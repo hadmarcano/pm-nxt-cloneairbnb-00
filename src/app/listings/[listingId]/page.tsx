@@ -4,7 +4,8 @@ import getReservations from "@molecules/serverActions/getReservations";
 
 import ClientProcessor from "@atoms/clientProcessor/ClientProcessor";
 import EmptyState from "@atoms/emptyState/EmptyState";
-import ListingClient from "../ListingClient";
+import ListingClient from "./ListingClient";
+
 
 
 interface IParams {
