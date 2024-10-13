@@ -17,37 +17,35 @@ interface ListingHeadProps {
 }
 
 const ListingHead: React.FC<ListingHeadProps> = ({ title, locationValue, imageSrc, id, currentUser }) => {
-
 	const { getCountryByValue } = useCountries();
 
 	const location = getCountryByValue(locationValue);
 
 	return (
-	 <>
-	 	<Heading title={title} subtitle={`${location?.region}, ${location?.label}`} />
-		<div
-			className="
+		<>
+			<Heading title={title} subtitle={`${location?.region}, ${location?.label}`} />
+			<div
+				className="
 				w-full
 				h-[60vh]
 				overflow-hidden
 				rounded-xl
 				relative
 			"
-		>
-			<Image src={imageSrc} fill className="object-cover w-full" alt="Image" />
-			<div
-				className="
+			>
+				<Image src={imageSrc} fill className="object-cover w-full" alt="Image" />
+				<div
+					className="
 					absolute
 					top-5
 					right-5
 				"
-			>
-
-				<HeartButton listingId={id} currentUser={currentUser} />
+				>
+					<HeartButton listingId={id} currentUser={currentUser} />
+				</div>
 			</div>
-		</div>
-	 </>
-  )
-}
+		</>
+	);
+};
 
-export default ListingHead
+export default ListingHead;

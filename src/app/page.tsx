@@ -8,22 +8,22 @@ import { IListingsParams } from "./serverActions/interfaces/listingsParams.inter
 import getCurrentUser from "./serverActions/getCurrentUser";
 
 interface HomeProps {
-  searchParams: IListingsParams;
+	searchParams: IListingsParams;
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const listings = await getListings(searchParams);
-  const currentUser = await getCurrentUser();
+	const listings = await getListings(searchParams);
+	const currentUser = await getCurrentUser();
 
-  if (listings.length === 0) {
+	if (listings.length === 0) {
 		return (
 			<ClientProcessor>
 				<EmptyState showReset />
 			</ClientProcessor>
-		)
+		);
 	}
 
-  return (
+	return (
 		<ClientProcessor>
 			<Container>
 				<div
@@ -37,19 +37,14 @@ const Home = async ({ searchParams }: HomeProps) => {
 						xl:grid-cols-5
 						2xl:grid-cols-6
 						gap-8
-					"
-				>
+					">
 					{listings.map((listing: any) => (
 						<ListingCard currentUser={currentUser} key={listing.id} data={listing} />
 					))}
-
 				</div>
-
 			</Container>
-
 		</ClientProcessor>
-  )
-}
-
+	);
+};
 
 export default Home;
