@@ -66,6 +66,8 @@ export default async function getListings(params: IGetListingsParams) {
 				}
 			}
 
+			// console.log("query-listings",query);
+
 			const listings = await prisma.listing.findMany({
 				where: query,
 				orderBy: {
@@ -73,11 +75,13 @@ export default async function getListings(params: IGetListingsParams) {
 				}
 			});
 
+			// console.log("listings",listings);
 			const safeListings = listings.map(listing => ({
 				...listing,
 				createdAt: listing.createdAt.toISOString()
 			}))
 
+			// console.log("safeListings",safeListings);
 			return safeListings;
 	} catch (error: any) {
 		throw new Error(error);
