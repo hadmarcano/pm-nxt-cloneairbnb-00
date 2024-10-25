@@ -71,15 +71,9 @@ const SearchModal = () => {
 			guestCount,
 			roomCount,
 			bathroomCount,
+			startDate: dateRange.startDate ? formatISO(dateRange.startDate) : undefined,
+			endDate: dateRange.endDate ? formatISO(dateRange.endDate) : undefined,
 		};
-
-		if (dateRange.startDate) {
-			updateQuery.startDate = formatISO(dateRange.startDate);
-		}
-
-		if (dateRange.endDate) {
-			updateQuery.endDate = formatISO(dateRange.endDate);
-		}
 
 		const url = queryString.stringifyUrl(
 			{
