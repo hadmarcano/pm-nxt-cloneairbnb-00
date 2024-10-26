@@ -12,9 +12,16 @@ interface HomeProps {
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-	const listings = await getListings(searchParams);
+
 	const currentUser = await getCurrentUser();
 
+	// create searchParamsData object with currentUser's id
+	const searchParamsData: IListingsParams = {
+		userId: currentUser?.id, // if currentUser is null or undefined, searchParamsData.userId will be undefined
+		...searchParams
+	}
+
+	const listings = await getListings(searchParamsData);
 
 	if (listings.length === 0) {
 		return (
